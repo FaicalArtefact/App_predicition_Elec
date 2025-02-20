@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prédiction de la consommation électrique</title>
+    <style>
+        /* Global Styles */
+        body {
+               font-family: 'Roboto', sans-serif; /* Utiliser une police web moderne */
+               background-color: #f0f2f5; /* Couleur de fond légère */
+               color: #333;
+               margin: 0;
+               padding: 0;
+            }
+
+       /* Header */
+        h1 {
+               color: #004d99; /* Couleur bleue moderne */
+               text-align: center;
+               margin-top: 20px;
+            }
+
+       /* Form Styling */
+        form {
+                background-color: #ffffff;
+                padding: 20px;
+                border-radius: 10px; /* Bordures arrondies */
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Ombre douce */
+                width: 90%;
+                max-width: 500px;
+                margin: 20px auto;
+             }
+
+       /* Label Styling */
+        label {
+                 display: block;
+                 margin-bottom: 10px;
+                 font-weight: 500; /* Poids de police modéré */
+                 color: #555; /* Couleur du texte des labels */
+                }
+
+        /* Input Styling */
+        input[type="text"] {
+                             width: calc(100% - 20px);
+                             padding: 12px;
+                             margin-bottom: 15px;
+                             border: 1px solid #ddd;
+                             border-radius: 5px; /* Bordures arrondies */
+                             box-sizing: border-box; /* Inclure le padding et la bordure dans la largeur totale */
+                             transition: border-color 0.3s ease; /* Transition pour l'effet de survol */
+                            }
+
+        input[type="text"]:focus {
+                                   border-color: #004d99; /* Changement de couleur lors du focus */
+                                   outline: none; /* Retirer le contour par défaut */
+                                 }
+        /* Button Styling */
+        button {
+                 background-color: #004d99;
+                 color: #fff;
+                 border: none;
+                 padding: 12px;
+                 border-radius: 5px;
+                 cursor: pointer;
+                 width: 100%;
+                 font-size: 16px;
+                 transition: background-color 0.3s ease;
+               }
+
+        button:hover {
+                      background-color: #003d80; /* Changement de couleur au survol */
+                     }
+
+        /* Prediction Result */
+        h2 {
+                color: #28a745;
+                text-align: center;
+                margin-top: 20px;
+            }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            form {
+                   padding: 15px;
+                  }
+
+            input[type="text"], button {
+                  width: 100%;
+                    }
+                }
+
+    </style>
+</head>
+<body>
+    <h1>Prédiction de la consommation électrique</h1>
+    
+    <form action="/predict" method="post">
+        <label for="s_geom_groupe">Surface géométrique du groupe :</label>
+        <input type="text" id="s_geom_groupe" name="s_geom_groupe" required><br><br>
+
+        <label for="hauteur_mean">Hauteur moyenne :</label>
+        <input type="text" id="hauteur_mean" name="hauteur_mean" required><br><br>
+
+        <label for="max_hauteur">Hauteur maximale :</label>
+        <input type="text" id="max_hauteur" name="max_hauteur" required><br><br>
+
+        <label for="altitude_sol_mean">Altitude moyenne du sol :</label>
+        <input type="text" id="altitude_sol_mean" name="altitude_sol_mean" required><br><br>
+
+        <label for="nb_pdl_res">Nombre de points de livraison résidentiels :</label>
+        <input type="text" id="nb_pdl_res" name="nb_pdl_res" required><br><br>
+
+        <label for="nb_niveau">Nombre de niveaux :</label>
+        <input type="text" id="nb_niveau" name="nb_niveau" required><br><br>
+
+        <label for="annee_construction">Année de construction :</label>
+        <input type="text" id="annee_construction" name="annee_construction" required><br><br>
+
+        <label for="nb_log">Nombre de logements :</label>
+        <input type="text" id="nb_log" name="nb_log" required><br><br>
+
+        <label for="code_départemental"> Département  :</label>
+        <input type="text" id="code_départemental" name="code_départemental" required><br><br>
+
+        <button type="submit">Prédire la consommation</button>
+    </form>
+
+    {% if prediction %}
+        <h2>Prédiction de consommation : {{ prediction }} kWh</h2>
+    {% endif %}
+</body>
